@@ -36,7 +36,7 @@ public class Monster : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isMoving)
+        if (isMoving && waypointTarget != null)
         {
             
             transform.position = Vector3.MoveTowards(transform.position, waypointTarget.transform.position, Time.deltaTime * walkingSpeed);
@@ -45,7 +45,18 @@ public class Monster : MonoBehaviour
 
     }
 
-    void MeetMonster(Monster otherMonster)
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("OnTrigger Enter called)");
+        if(other.gameObject.tag == "Monster")
+        { MeetMonster(other.gameObject); }
+        else if (other.gameObject.tag == "Beacon")
+        { 
+            BeaconCollide(other.gameObject); }
+        
+    }
+
+    void MeetMonster(GameObject otherMonster)
     {
         if(otherMonster != null)
         {
@@ -95,6 +106,16 @@ public class Monster : MonoBehaviour
 
     }
 
+    void BeaconCollide(GameObject myBeacon)
+    {
+        Debug.Log("Ran into beacon!");
+        if(songIndex < songNotes.Length)
+        { songIndex++; }
+        else { songIndex = 0; }
+        Destroy(myBeacon);
+
+    }
+
     void Illuminate() //Note light will illuminate behind the monster for a visual as well as auditory cue. VFX stuff.
     {
         noteLight.color = noteColor;
@@ -113,9 +134,9 @@ public class Monster : MonoBehaviour
     }
     void FindBeacon()
     {
-        Debug.Log("Find Beacon called");
+        //Debug.Log("Find Beacon called");
         GameObject[] allObjects = GameObject.FindGameObjectsWithTag("Beacon");
-        Debug.Log("Found this many objects with Beacon tag:" + allObjects.Length);
+        //Debug.Log("Found this many objects with Beacon tag:" + allObjects.Length);
         float nearestDistance = 10000;
         for (int i = 0; i < allObjects.Length; i++)
         {
@@ -124,13 +145,18 @@ public class Monster : MonoBehaviour
 
             if(distance < nearestDistance)
             {
-                waypointTarget = allObjects[i];
-                nearestDistance = distance;
-                Debug.Log("Found new waypoint");
+                Beacon myBeacon = allObjects[i].GetComponent<Beacon>();
+                //Debug.Log("Tone from beacon is: " + myBeacon.toneNum);
+                if (myBeacon.toneNum == songNotes[songIndex])
+                {
+                    waypointTarget = allObjects[i];
+                    nearestDistance = distance;
+                    //Debug.Log("Found waypoint with matching tone.");
+                }
             }
             else
             {
-                Debug.Log("Not found, iteration:" + i);
+                //Debug.Log("Not found, iteration:" + i);
             }
         }
 
