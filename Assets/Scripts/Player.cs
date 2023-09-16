@@ -14,6 +14,11 @@ public class Player : MonoBehaviour
     public float lookSpeed = 2.0f;
     public float lookXLimit = 45.0f;
 
+    public int radioSelection = 0; //0-7 for the 8 tones and selections.
+    public bool broadcasting = false; //whether or not the player is actively putting out a tone
+    public GameObject beaconPrefab;
+    public bool beaconOnCooldown = false; //If false, player can place a beacon.
+
     CharacterController characterController;
     Vector3 moveDirection = Vector3.zero;
     float rotationX = 0;
@@ -70,5 +75,38 @@ public class Player : MonoBehaviour
             playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
             transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
         }
+
+        if (Input.GetButton("Fire1"))
+        {
+
+        }
+
+        if(Input.GetButton("Fire2")) // Placing Beacon
+        {
+            if (!beaconOnCooldown)
+            {
+                beaconOnCooldown = true;
+                Debug.Log("Beacononcool down set to: " + beaconOnCooldown);
+                PlaceBeacon();
+                
+            }
+            StartCoroutine(Cooldown());
+            
+        }
     }
+
+    void PlaceBeacon()
+    {
+        Beacon myBeacon = (Instantiate(beaconPrefab, transform.position, Quaternion.identity)).GetComponent<Beacon>();
+        myBeacon.SetTone(radioSelection + 1);
+    }
+
+    IEnumerator Cooldown()
+    {
+        
+        yield return new WaitForSeconds(5);
+        beaconOnCooldown = false;
+        Debug.Log("Cooldown over");
+    }
+
 }
