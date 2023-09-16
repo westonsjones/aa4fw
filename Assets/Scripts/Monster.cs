@@ -4,7 +4,7 @@ using UnityEngine;
 //Created by Weston Jones
 public class Monster : MonoBehaviour
 {
-    public float walkingSpeed = 10.0f;
+    public float walkingSpeed = 4.0f;
     public float turnSpeed = 1f;
     public int[] songNotes; // Songs will be a sequence of ints, from 1-8, adhereing to the musical scale of a single octave.
     public int songSize; //Not super necessary but good for design work in the editor.
@@ -14,20 +14,35 @@ public class Monster : MonoBehaviour
     public AudioClip angry, happy, fighting, death; // sounds for various states
     public AudioClip sfx_crunch; //for when they destroy a resource or town.
     public Light noteLight;
-
+    public Color noteColor;
+    public bool isMoving = true; //Set to false when the monster is eating resources or other behavior. Otherwise every update it will move.
     public GameObject waypointTarget; //This can be a beacon, another monster, a random wander point, or a resource.
+    public bool playerBroadcasting; //True if the player is playing a song on their radio. Used to override beacon behavior.
+    public bool isAnimating = false;
+
+    //public Animator anim;
 
     // Start is called before the first frame update
     void Start()
     {
         noteLight = GetComponent<Light>();
         m_MyAudioSource = GetComponent<AudioSource>();
+        //anim = GetComponentInChildren<Animator>();
+        //anim["ToneLight"].wrapMode = WrapMode.Once;
+        InvokeRepeating("FindBeacon", 0.1f, 3.0f);
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (isMoving)
+        {
+            
+            transform.position = Vector3.MoveTowards(transform.position, waypointTarget.transform.position, Time.deltaTime * walkingSpeed);
+        }
+       
+
     }
 
     void MeetMonster(Monster otherMonster)
@@ -48,20 +63,28 @@ public class Monster : MonoBehaviour
         switch(songIndex)
         {
             case 1: m_MyAudioSource.clip = note1;
+                noteColor = new Color(255, 2, 0, 1); // Red
                 break;
             case 2: m_MyAudioSource.clip = note2;
+                noteColor = new Color(255, 255, 0, 1);// Yellow
                 break;
             case 3: m_MyAudioSource.clip = note3;
+                noteColor = new Color(255, 130, 0, 1); //Orange
                 break;
             case 4: m_MyAudioSource.clip = note4;
+                noteColor = new Color(48, 255, 0, 1); //Green
                 break;
             case 5: m_MyAudioSource.clip = note5;
+                noteColor = new Color(0, 193, 255, 1); // Light blue
                 break;
             case 6: m_MyAudioSource.clip = note6;
+                noteColor = new Color(7, 0, 255, 1); //Deep blue
                 break;
             case 7: m_MyAudioSource.clip = note7;
+                noteColor = new Color(199, 0, 255, 1); //Purple
                 break;
             case 8: m_MyAudioSource.clip = note8;
+                noteColor = new Color(255, 72, 170, 1); //Pink
                 break;
             default: break; //add error noise or something here
 
@@ -74,6 +97,44 @@ public class Monster : MonoBehaviour
 
     void Illuminate() //Note light will illuminate behind the monster for a visual as well as auditory cue. VFX stuff.
     {
+        noteLight.color = noteColor;
+        InvokeRepeating("PlayTone", 0.1f, 2.0f);
+    }
+
+    void PlayTone()
+    {
+        
+    }
+
+    void PulseLight()
+    {
+        
+        //anim.Play("ToneLight");
+    }
+    void FindBeacon()
+    {
+        Debug.Log("Find Beacon called");
+        GameObject[] allObjects = GameObject.FindGameObjectsWithTag("Beacon");
+        Debug.Log("Found this many objects with Beacon tag:" + allObjects.Length);
+        float nearestDistance = 10000;
+        for (int i = 0; i < allObjects.Length; i++)
+        {
+           
+            float distance = Vector3.Distance(this.transform.position, allObjects[i].transform.position);
+
+            if(distance < nearestDistance)
+            {
+                waypointTarget = allObjects[i];
+                nearestDistance = distance;
+                Debug.Log("Found new waypoint");
+            }
+            else
+            {
+                Debug.Log("Not found, iteration:" + i);
+            }
+        }
 
     }
+    
+
 }
