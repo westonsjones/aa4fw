@@ -243,6 +243,7 @@ GameObject:
   - component: {fileID: 2250118887561448068}
   - component: {fileID: 8644608809292448708}
   - component: {fileID: 8924553182850858816}
+  - component: {fileID: 5037914868526639403}
   m_Layer: 0
   m_Name: Monster1
   m_TagString: Untagged
@@ -462,3 +463,16 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &5037914868526639403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7635679217115789216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: decb6a2d4b9bf6045b9f8231dc09fe54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  billboardType: 0

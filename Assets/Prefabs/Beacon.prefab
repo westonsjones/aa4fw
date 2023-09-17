@@ -115,6 +115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2868675084779214663}
   - component: {fileID: 5068860229352032778}
+  - component: {fileID: 8809100975174686217}
   m_Layer: 0
   m_Name: Beacon
   m_TagString: Untagged
@@ -189,6 +190,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8809100975174686217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2333245660221569429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: decb6a2d4b9bf6045b9f8231dc09fe54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  billboardType: 0
 --- !u!1 &3528971003175481951
 GameObject:
   m_ObjectHideFlags: 0
