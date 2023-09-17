@@ -212,7 +212,7 @@ public class Player : MonoBehaviour
 
     IEnumerator Cooldown()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(2);
         beaconOnCooldown = false;
         Debug.Log("Cooldown over");
     }
