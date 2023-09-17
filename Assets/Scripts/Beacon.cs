@@ -7,7 +7,7 @@ public class Beacon : MonoBehaviour, IToneStuff
     public int toneNum;
     public AudioClip myToneClip;
     AudioSource m_MyAudioSource;
-    public Light noteLight;
+    //public Light noteLight;
     public Color noteColor;
     public AudioClip note1, note2, note3, note4, note5, note6, note7, note8;
     public GameObject toneSphere;
@@ -42,7 +42,7 @@ public class Beacon : MonoBehaviour, IToneStuff
     {
         m_MyAudioSource.Play();
         //Debug.Log("Tone played.");
-        AnimateLight();
+        //AnimateLight();
     }
 
     void AnimateLight()
@@ -57,7 +57,7 @@ public class Beacon : MonoBehaviour, IToneStuff
 
     public void UpdateLightAndSound()
     {
-        Debug.Log("Updating light and sound");
+        
         switch (toneNum)
         {
             case 1:
@@ -96,7 +96,7 @@ public class Beacon : MonoBehaviour, IToneStuff
 
         }
 
-        noteLight.color = noteColor;
+      //  noteLight.color = noteColor;
         toneSphere.GetComponent<Renderer>().material.SetColor("_Albedo", noteColor);
         toneSphere.GetComponent<Renderer>().material.SetColor("_EmissionColor", noteColor);
 
