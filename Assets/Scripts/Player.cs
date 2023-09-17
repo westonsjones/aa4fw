@@ -84,7 +84,9 @@ public class Player : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0)) // Left click, turn on radio.
         {
-
+            if (broadcasting)
+            { broadcasting = false; }
+            else { broadcasting = true; }
         }
 
         if (Input.GetMouseButtonDown(1)) // Placing Beacon, right click.
@@ -99,6 +101,22 @@ public class Player : MonoBehaviour
             StartCoroutine(Cooldown());
             
         }
+
+        if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
+        {
+            if(radioSelection<7)
+            { radioSelection++; }
+            else { radioSelection = 0; }//reset to beginning
+            UpdateLightAndSound();
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
+        {
+            if (radioSelection > 0)
+            { radioSelection--; }
+            else { radioSelection = 7; }
+        }
+
+
     }
 
     void PlaceBeacon()
@@ -162,7 +180,6 @@ public class Player : MonoBehaviour
 
     IEnumerator Cooldown()
     {
-        
         yield return new WaitForSeconds(5);
         beaconOnCooldown = false;
         Debug.Log("Cooldown over");
