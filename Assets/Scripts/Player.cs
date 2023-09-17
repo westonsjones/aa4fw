@@ -84,9 +84,9 @@ public class Player : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0)) // Left click, turn on radio.
         {
-            if (broadcasting)
-            { broadcasting = false; }
-            else { broadcasting = true; }
+            if (!broadcasting)
+            { broadcasting = true; }
+            else { broadcasting = false; }
         }
 
         if (Input.GetMouseButtonDown(1)) // Placing Beacon, right click.
@@ -114,6 +114,7 @@ public class Player : MonoBehaviour
             if (radioSelection > 0)
             { radioSelection--; }
             else { radioSelection = 7; }
+            UpdateLightAndSound();
         }
 
 
@@ -135,11 +136,15 @@ public class Player : MonoBehaviour
 
     void UpdateLightAndSound()
     {
+        Debug.Log("Update Light and Sound called.");
         switch (radioSelection+1)
         {
+            
             case 1:
+                Debug.Log("Case 1 called");
                 m_MyAudioSource.clip = note1;
-                noteColor = new Color(255, 2, 0, 1); // Red
+                noteColor = Color.red; // Red
+                Debug.Log(noteColor.ToString());
                 break;
             case 2:
                 m_MyAudioSource.clip = note2;
@@ -176,6 +181,7 @@ public class Player : MonoBehaviour
         
         toneSphere.GetComponent<Renderer>().material.SetColor("_Albedo", noteColor);
         toneSphere.GetComponent<Renderer>().material.SetColor("_EmissionColor", noteColor);
+        Debug.Log("Update Light and Sound finished.");
     }
 
     public void GameOver()
