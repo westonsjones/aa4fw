@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Spine;
+using Spine.Unity;
 //Created by Weston Jones
 public class Monster : MonoBehaviour
 {
@@ -21,21 +23,22 @@ public class Monster : MonoBehaviour
     public bool playerBroadcasting; //True if the player is playing a song on their radio. Used to override beacon behavior.
     public bool isAnimating = false;
     public GameObject houseTarget; //This is a target defined by the designer that the creature will try to destroy, causing a game over.
-    
+    public SkeletonAnimation skeletonAnimation;
 
     //public Animator anim;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        //skeletonAnimation = GetComponent<SkeletonAnimation>();
         //noteLight = GetComponent<Light>();
         m_MyAudioSource = GetComponent<AudioSource>();
         //anim = GetComponentInChildren<Animator>();
         //anim["ToneLight"].wrapMode = WrapMode.Once;
         InvokeRepeating("FindBeacon", 0.1f, 3.0f);
         InvokeRepeating("SingSong", 0.1f, 10.0f);
-
+        
+        
     }
 
     // Update is called once per frame
@@ -43,12 +46,13 @@ public class Monster : MonoBehaviour
     {
         if (isMoving && waypointTarget != null)
         {
-            
+            skeletonAnimation.AnimationName = "Walk";
             transform.position = Vector3.MoveTowards(transform.position, waypointTarget.transform.position, Time.deltaTime * walkingSpeed);
         }
         else if(waypointTarget == null)
         {
-            FindTarget();
+            //FindTarget();
+            skeletonAnimation.AnimationName = "Idle";
         }
        
 
@@ -89,7 +93,9 @@ public class Monster : MonoBehaviour
         
         m_MyAudioSource.clip = song;
         m_MyAudioSource.Play();
+        skeletonAnimation.AnimationName = "Sing";
         InvokeRepeating("Illuminate", 0.1f, 1.50f);
+
 
     }
 
