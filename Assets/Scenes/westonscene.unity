@@ -642,9 +642,21 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7236847930845242957, guid: 1e448b1fed94f5243a64ec6da95a3158, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7635679217115789216, guid: 1e448b1fed94f5243a64ec6da95a3158, type: 3}
       propertyPath: m_Name
       value: Monster1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8246756306802056557, guid: 1e448b1fed94f5243a64ec6da95a3158, type: 3}
+      propertyPath: m_Range
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8246756306802056557, guid: 1e448b1fed94f5243a64ec6da95a3158, type: 3}
+      propertyPath: m_Intensity
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8644608809292448708, guid: 1e448b1fed94f5243a64ec6da95a3158, type: 3}
       propertyPath: m_Volume
@@ -654,7 +666,8 @@ PrefabInstance:
       propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8924553182850858816, guid: 1e448b1fed94f5243a64ec6da95a3158, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -668,6 +681,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 354637411905519368, guid: 745b21b6818520349b2ab3da72c65fb8, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 849050353554935105, guid: 745b21b6818520349b2ab3da72c65fb8, type: 3}
       propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
@@ -685,7 +702,7 @@ PrefabInstance:
       objectReference: {fileID: 9156107046792889231, guid: 5b61d67bca0aa2c4aac32d30f4a142d4, type: 3}
     - target: {fileID: 4793800302830444342, guid: 745b21b6818520349b2ab3da72c65fb8, type: 3}
       propertyPath: radioSelection
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6717381497670679712, guid: 745b21b6818520349b2ab3da72c65fb8, type: 3}
       propertyPath: m_LocalPosition.x
