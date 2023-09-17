@@ -9,6 +9,7 @@ public class Monster : MonoBehaviour
     public int[] songNotes; // Songs will be a sequence of ints, from 1-8, adhereing to the musical scale of a single octave.
     public int songSize; //Not super necessary but good for design work in the editor.
     public int songIndex = 0; //Used to iterate through the song.
+    public int lightIndex = 0; //Used to iterate through the light flashes during notes.
     AudioSource m_MyAudioSource;
     public AudioClip note1, note2, note3, note4, note5, note6, note7, note8; // The different notes of the scale for this creature.
     public AudioClip angry, happy, fighting, death, song; // sounds for various states
@@ -19,12 +20,14 @@ public class Monster : MonoBehaviour
     public GameObject waypointTarget; //This can be a beacon, another monster, a random wander point, or a resource.
     public bool playerBroadcasting; //True if the player is playing a song on their radio. Used to override beacon behavior.
     public bool isAnimating = false;
+    
 
     //public Animator anim;
 
     // Start is called before the first frame update
     void Start()
     {
+        
         noteLight = GetComponent<Light>();
         m_MyAudioSource = GetComponent<AudioSource>();
         //anim = GetComponentInChildren<Animator>();
@@ -72,38 +75,10 @@ public class Monster : MonoBehaviour
 
     void SingSong()
     {
-        /*switch(songIndex)
-        {
-            case 1: m_MyAudioSource.clip = note1;
-                noteColor = new Color(255, 2, 0, 1); // Red
-                break;
-            case 2: m_MyAudioSource.clip = note2;
-                noteColor = new Color(255, 255, 0, 1);// Yellow
-                break;
-            case 3: m_MyAudioSource.clip = note3;
-                noteColor = new Color(255, 130, 0, 1); //Orange
-                break;
-            case 4: m_MyAudioSource.clip = note4;
-                noteColor = new Color(48, 255, 0, 1); //Green
-                break;
-            case 5: m_MyAudioSource.clip = note5;
-                noteColor = new Color(0, 193, 255, 1); // Light blue
-                break;
-            case 6: m_MyAudioSource.clip = note6;
-                noteColor = new Color(7, 0, 255, 1); //Deep blue
-                break;
-            case 7: m_MyAudioSource.clip = note7;
-                noteColor = new Color(199, 0, 255, 1); //Purple
-                break;
-            case 8: m_MyAudioSource.clip = note8;
-                noteColor = new Color(255, 72, 170, 1); //Pink
-                break;
-            default: break; //add error noise or something here
-
-        }*/
+        
         m_MyAudioSource.clip = song;
         m_MyAudioSource.Play();
-        Illuminate();
+        InvokeRepeating("Illuminate", 0.1f, 1.50f);
 
     }
 
@@ -119,8 +94,51 @@ public class Monster : MonoBehaviour
 
     void Illuminate() //Note light will illuminate behind the monster for a visual as well as auditory cue. VFX stuff.
     {
+        switch (songNotes[lightIndex])
+        {
+            case 1:
+                //m_MyAudioSource.clip = note1;
+                noteColor = new Color(255, 2, 0, 1); // Red
+                break;
+            case 2:
+                //m_MyAudioSource.clip = note2;
+                noteColor = new Color(255, 255, 0, 1);// Yellow
+                break;
+            case 3:
+                //m_MyAudioSource.clip = note3;
+                noteColor = new Color(255, 130, 0, 1); //Orange
+                break;
+            case 4:
+                //m_MyAudioSource.clip = note4;
+                noteColor = new Color(48, 255, 0, 1); //Green
+                break;
+            case 5:
+                //m_MyAudioSource.clip = note5;
+                noteColor = new Color(0, 193, 255, 1); // Light blue
+                break;
+            case 6:
+                //m_MyAudioSource.clip = note6;
+                noteColor = new Color(7, 0, 255, 1); //Deep blue
+                break;
+            case 7:
+                //m_MyAudioSource.clip = note7;
+                noteColor = new Color(199, 0, 255, 1); //Purple
+                break;
+            case 8:
+                //m_MyAudioSource.clip = note8;
+                noteColor = new Color(255, 72, 170, 1); //Pink
+                break;
+            default: break; //add error noise or something here
+
+        }
         noteLight.color = noteColor;
-        InvokeRepeating("PlayTone", 0.1f, 2.0f);
+        if(lightIndex < songNotes.Length -1)
+        { lightIndex++; }
+        else{
+            lightIndex = 0;
+            CancelInvoke("Illuminate");
+        }
+        //InvokeRepeating("PlayTone", 0.1f, 2.0f);
     }
 
     void PlayTone()
@@ -131,7 +149,7 @@ public class Monster : MonoBehaviour
     void PulseLight()
     {
         
-        //anim.Play("ToneLight");
+        
     }
     void FindBeacon()
     {
