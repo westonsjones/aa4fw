@@ -11,7 +11,7 @@ public class Monster : MonoBehaviour
     public int songIndex = 0; //Used to iterate through the song.
     AudioSource m_MyAudioSource;
     public AudioClip note1, note2, note3, note4, note5, note6, note7, note8; // The different notes of the scale for this creature.
-    public AudioClip angry, happy, fighting, death; // sounds for various states
+    public AudioClip angry, happy, fighting, death, song; // sounds for various states
     public AudioClip sfx_crunch; //for when they destroy a resource or town.
     public Light noteLight;
     public Color noteColor;
