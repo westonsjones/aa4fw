@@ -30,6 +30,7 @@ public class Monster : MonoBehaviour
         //anim = GetComponentInChildren<Animator>();
         //anim["ToneLight"].wrapMode = WrapMode.Once;
         InvokeRepeating("FindBeacon", 0.1f, 3.0f);
+        InvokeRepeating("SingSong", 0.1f, 10.0f);
 
     }
 
@@ -71,7 +72,7 @@ public class Monster : MonoBehaviour
 
     void SingSong()
     {
-        switch(songIndex)
+        /*switch(songIndex)
         {
             case 1: m_MyAudioSource.clip = note1;
                 noteColor = new Color(255, 2, 0, 1); // Red
@@ -99,8 +100,8 @@ public class Monster : MonoBehaviour
                 break;
             default: break; //add error noise or something here
 
-        }
-
+        }*/
+        m_MyAudioSource.clip = song;
         m_MyAudioSource.Play();
         Illuminate();
 

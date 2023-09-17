@@ -178,6 +178,12 @@ public class Player : MonoBehaviour
         toneSphere.GetComponent<Renderer>().material.SetColor("_EmissionColor", noteColor);
     }
 
+    public void GameOver()
+    {
+        //Add game over text that tells you you lost and why. (City run over).
+
+    }
+
     IEnumerator Cooldown()
     {
         yield return new WaitForSeconds(5);
