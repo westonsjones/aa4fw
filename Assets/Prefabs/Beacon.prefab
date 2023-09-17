@@ -239,7 +239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cce8c47a6a5091f4d9724510013162cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toneNum: 1
+  toneNum: 5
   myToneClip: {fileID: 8300000, guid: be0d2ce43fde70b49932559da7b9453f, type: 3}
   noteLight: {fileID: 5872464764215955402}
   noteColor: {r: 0, g: 0, b: 0, a: 0}
@@ -414,7 +414,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2681042384014995971, guid: e4ceaadd2aced0d4895792d29d937e5e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.435
+      value: 3.684
       objectReference: {fileID: 0}
     - target: {fileID: 2681042384014995971, guid: e4ceaadd2aced0d4895792d29d937e5e, type: 3}
       propertyPath: m_LocalPosition.z

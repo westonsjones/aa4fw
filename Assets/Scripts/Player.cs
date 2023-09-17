@@ -18,6 +18,10 @@ public class Player : MonoBehaviour
     public bool broadcasting = false; //whether or not the player is actively putting out a tone
     public GameObject beaconPrefab;
     public bool beaconOnCooldown = false; //If false, player can place a beacon.
+    public Color noteColor;
+    public GameObject toneSphere;
+    AudioSource m_MyAudioSource;
+    public AudioClip note1, note2, note3, note4, note5, note6, note7, note8;
 
     CharacterController characterController;
     Vector3 moveDirection = Vector3.zero;
@@ -29,7 +33,9 @@ public class Player : MonoBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
-
+        m_MyAudioSource = GetComponent<AudioSource>();
+        InvokeRepeating("PlayTone", 1.0f, 6.0f);
+        
         // Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -76,12 +82,12 @@ public class Player : MonoBehaviour
             transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
         }
 
-        if (Input.GetButton("Fire1"))
+        if (Input.GetMouseButtonDown(0)) // Left click, turn on radio.
         {
 
         }
 
-        if(Input.GetButton("Fire2")) // Placing Beacon
+        if (Input.GetMouseButtonDown(1)) // Placing Beacon, right click.
         {
             if (!beaconOnCooldown)
             {
@@ -97,8 +103,61 @@ public class Player : MonoBehaviour
 
     void PlaceBeacon()
     {
-        Beacon myBeacon = (Instantiate(beaconPrefab, transform.position, Quaternion.identity)).GetComponent<Beacon>();
+        Beacon myBeacon = (Instantiate(beaconPrefab, transform.position + new Vector3(0, 0, 10), Quaternion.identity)).GetComponent<Beacon>();
         myBeacon.SetTone(radioSelection + 1);
+    }
+
+    void PlayTone()
+    {
+        if(broadcasting)
+        {
+            m_MyAudioSource.Play();
+        }
+    }
+
+    void UpdateLightAndSound()
+    {
+        switch (radioSelection+1)
+        {
+            case 1:
+                m_MyAudioSource.clip = note1;
+                noteColor = new Color(255, 2, 0, 1); // Red
+                break;
+            case 2:
+                m_MyAudioSource.clip = note2;
+                noteColor = new Color(255, 255, 0, 1);// Yellow
+                break;
+            case 3:
+                m_MyAudioSource.clip = note3;
+                noteColor = new Color(255, 130, 0, 1); //Orange
+                break;
+            case 4:
+                m_MyAudioSource.clip = note4;
+                noteColor = new Color(48, 255, 0, 1); //Green
+                break;
+            case 5:
+                m_MyAudioSource.clip = note5;
+                noteColor = new Color(0, 193, 255, 1); // Light blue
+                break;
+            case 6:
+                m_MyAudioSource.clip = note6;
+                noteColor = new Color(7, 0, 255, 1); //Deep blue
+                break;
+            case 7:
+                m_MyAudioSource.clip = note7;
+                noteColor = new Color(199, 0, 255, 1); //Purple
+                break;
+            case 8:
+                m_MyAudioSource.clip = note8;
+                noteColor = new Color(255, 72, 170, 1); //Pink
+                break;
+            default: break; //add error noise or something here
+
+        }
+
+        
+        toneSphere.GetComponent<Renderer>().material.SetColor("_Albedo", noteColor);
+        toneSphere.GetComponent<Renderer>().material.SetColor("_EmissionColor", noteColor);
     }
 
     IEnumerator Cooldown()
