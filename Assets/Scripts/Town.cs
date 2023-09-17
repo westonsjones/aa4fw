@@ -18,7 +18,7 @@ public class Town : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("House triggered!");
+        //Debug.Log("House triggered!");
         if (other.gameObject.tag == "Monster")
         {
             Debug.Log("Monster hit the house, game over!");
