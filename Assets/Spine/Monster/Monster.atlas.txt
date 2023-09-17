@@ -1,0 +1,17 @@
+Monster.png
+size:796,2276
+filter:Linear,Linear
+pma:true
+Images/Eyeopen
+bounds:495,1071,77,104
+Images/Monster1Leg
+bounds:591,872,137,1402
+Images/Monster1Torso
+bounds:2,2,491,1173
+Images/Monster1arm
+bounds:2,1177,587,1097
+Images/Monster1head
+bounds:495,156,297,714
+Images/Mouth
+bounds:730,2027,247,64
+rotate:90
