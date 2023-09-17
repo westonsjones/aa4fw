@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class Town : MonoBehaviour
+public class HeavenGate : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -18,13 +19,13 @@ public class Town : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("House triggered!");
+        
         if (other.gameObject.tag == "Monster")
         {
-            Debug.Log("Monster hit the house, game over!");
-            GameObject[] playerObj = GameObject.FindGameObjectsWithTag("Player");
-            playerObj[0].GetComponent<Player>().GameOver();
+            Debug.Log("Victory!");
+            Cursor.lockState = CursorLockMode.None;
+            SceneManager.LoadScene("VictoryScreen");
+
         }
     }
-
 }

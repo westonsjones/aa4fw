@@ -51,13 +51,14 @@ public class Monster : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("OnTrigger Enter called)");
+        //Debug.Log("OnTrigger Enter called)");
         if(other.gameObject.tag == "Monster")
         { MeetMonster(other.gameObject); }
         else if (other.gameObject.tag == "Beacon")
         { 
             BeaconCollide(other.gameObject); }
-        
+       
+
     }
 
     void MeetMonster(GameObject otherMonster)
