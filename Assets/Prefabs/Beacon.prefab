@@ -9892,7 +9892,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6321893427046336924}
   - {fileID: 8799899299822958864}
   - {fileID: 2868675084779214663}
   - {fileID: 4716497732821124090}
@@ -9913,7 +9912,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   toneNum: 1
   myToneClip: {fileID: 8300000, guid: be0d2ce43fde70b49932559da7b9453f, type: 3}
-  noteLight: {fileID: 5872464764215955402}
+  noteLight: {fileID: 0}
   noteColor: {r: 0, g: 0, b: 0, a: 0}
   note1: {fileID: 8300000, guid: be0d2ce43fde70b49932559da7b9453f, type: 3}
   note2: {fileID: 8300000, guid: d31d8eed5ba0eb742b1f2ee118f2ba37, type: 3}
@@ -9980,7 +9979,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -10068,86 +10067,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!1001 &8254844423251409823
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 8673395102738104433}
-    m_Modifications:
-    - target: {fileID: 2589630064380654677, guid: e4ceaadd2aced0d4895792d29d937e5e, type: 3}
-      propertyPath: m_Intensity
-      value: 1.78
-      objectReference: {fileID: 0}
-    - target: {fileID: 2681042384014995971, guid: e4ceaadd2aced0d4895792d29d937e5e, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.53154
-      objectReference: {fileID: 0}
-    - target: {fileID: 2681042384014995971, guid: e4ceaadd2aced0d4895792d29d937e5e, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.53154
-      objectReference: {fileID: 0}
-    - target: {fileID: 2681042384014995971, guid: e4ceaadd2aced0d4895792d29d937e5e, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.53154
-      objectReference: {fileID: 0}
-    - target: {fileID: 2681042384014995971, guid: e4ceaadd2aced0d4895792d29d937e5e, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2681042384014995971, guid: e4ceaadd2aced0d4895792d29d937e5e, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 3.6549997
-      objectReference: {fileID: 0}
-    - target: {fileID: 2681042384014995971, guid: e4ceaadd2aced0d4895792d29d937e5e, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2681042384014995971, guid: e4ceaadd2aced0d4895792d29d937e5e, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2681042384014995971, guid: e4ceaadd2aced0d4895792d29d937e5e, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2681042384014995971, guid: e4ceaadd2aced0d4895792d29d937e5e, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2681042384014995971, guid: e4ceaadd2aced0d4895792d29d937e5e, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2681042384014995971, guid: e4ceaadd2aced0d4895792d29d937e5e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2681042384014995971, guid: e4ceaadd2aced0d4895792d29d937e5e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2681042384014995971, guid: e4ceaadd2aced0d4895792d29d937e5e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6175313118684815007, guid: e4ceaadd2aced0d4895792d29d937e5e, type: 3}
-      propertyPath: m_Name
-      value: ToneLight
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e4ceaadd2aced0d4895792d29d937e5e, type: 3}
---- !u!108 &5872464764215955402 stripped
-Light:
-  m_CorrespondingSourceObject: {fileID: 2589630064380654677, guid: e4ceaadd2aced0d4895792d29d937e5e, type: 3}
-  m_PrefabInstance: {fileID: 8254844423251409823}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &6321893427046336924 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2681042384014995971, guid: e4ceaadd2aced0d4895792d29d937e5e, type: 3}
-  m_PrefabInstance: {fileID: 8254844423251409823}
-  m_PrefabAsset: {fileID: 0}
