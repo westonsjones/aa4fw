@@ -22,6 +22,9 @@ public class Player : MonoBehaviour
     public GameObject toneSphere;
     AudioSource m_MyAudioSource;
     public AudioClip note1, note2, note3, note4, note5, note6, note7, note8;
+    new Renderer rend;
+    Material mat;
+
 
     CharacterController characterController;
     Vector3 moveDirection = Vector3.zero;
@@ -35,7 +38,9 @@ public class Player : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         m_MyAudioSource = GetComponent<AudioSource>();
         InvokeRepeating("PlayTone", 1.0f, 6.0f);
-        
+        rend = toneSphere.GetComponent<Renderer>();
+        mat = toneSphere.GetComponent<Renderer>().material;
+
         // Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -137,7 +142,8 @@ public class Player : MonoBehaviour
     void UpdateLightAndSound()
     {
         Debug.Log("Update Light and Sound called.");
-        switch (radioSelection+1)
+        int sel = radioSelection + 1;
+        switch (sel)
         {
             
             case 1:
@@ -148,39 +154,45 @@ public class Player : MonoBehaviour
                 break;
             case 2:
                 m_MyAudioSource.clip = note2;
-                noteColor = new Color(255, 255, 0, 1);// Yellow
+                noteColor = new Color(1.0f, 0.45f, 0f, 1);//Orange
                 break;
             case 3:
                 m_MyAudioSource.clip = note3;
-                noteColor = new Color(255, 130, 0, 1); //Orange
+                noteColor = new Color(1f, 1f, 0f, 1); //Yellow
                 break;
             case 4:
                 m_MyAudioSource.clip = note4;
-                noteColor = new Color(48, 255, 0, 1); //Green
+                noteColor = new Color(0, 1f, 0, 1); //Green
                 break;
             case 5:
                 m_MyAudioSource.clip = note5;
-                noteColor = new Color(0, 193, 255, 1); // Light blue
+                noteColor = new Color(0, 1f, 1f, 1); // Light blue
                 break;
             case 6:
                 m_MyAudioSource.clip = note6;
-                noteColor = new Color(7, 0, 255, 1); //Deep blue
+                noteColor = new Color(0f, 0f, 1f, 1); //Deep blue
                 break;
             case 7:
                 m_MyAudioSource.clip = note7;
-                noteColor = new Color(199, 0, 255, 1); //Purple
+                noteColor = new Color(0.5f, 0f, 1f, 1); //Purple
                 break;
             case 8:
                 m_MyAudioSource.clip = note8;
-                noteColor = new Color(255, 72, 170, 1); //Pink
+                noteColor = new Color(1f, 0f, 1f, 1); //Pink
                 break;
             default: break; //add error noise or something here
 
         }
 
-        
-        toneSphere.GetComponent<Renderer>().material.SetColor("_Albedo", noteColor);
-        toneSphere.GetComponent<Renderer>().material.SetColor("_EmissionColor", noteColor);
+        //mat.EnableKeyword("_EMISSION");
+        //mat.globalIlluminationFlags = MaterialGlobalIlluminationFlags.RealtimeEmissive;
+        mat.SetColor("_Color", noteColor);
+       // mat.SetColor("_EmissionColor", noteColor * 10);
+       // RendererExtensions.UpdateGIMaterials(GetComponent<Renderer>());
+
+        // Inform Unity's GI system to recalculate GI based on the new emission map.
+        //DynamicGI.SetEmissive(GetComponent<Renderer>(), noteColor * 10);
+        //DynamicGI.UpdateEnvironment();
         Debug.Log("Update Light and Sound finished.");
     }
 

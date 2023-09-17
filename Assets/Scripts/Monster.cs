@@ -28,7 +28,7 @@ public class Monster : MonoBehaviour
     void Start()
     {
         
-        noteLight = GetComponent<Light>();
+        //noteLight = GetComponent<Light>();
         m_MyAudioSource = GetComponent<AudioSource>();
         //anim = GetComponentInChildren<Animator>();
         //anim["ToneLight"].wrapMode = WrapMode.Once;
@@ -98,35 +98,35 @@ public class Monster : MonoBehaviour
         {
             case 1:
                 //m_MyAudioSource.clip = note1;
-                noteColor = new Color(255, 2, 0, 1); // Red
+                noteColor = Color.red; // Red
                 break;
             case 2:
                 //m_MyAudioSource.clip = note2;
-                noteColor = new Color(255, 255, 0, 1);// Yellow
+                noteColor = new Color(1.0f, 0.45f, 0f, 1);//Orange
                 break;
             case 3:
                 //m_MyAudioSource.clip = note3;
-                noteColor = new Color(255, 130, 0, 1); //Orange
+                noteColor = new Color(1f, 1f, 0f, 1); //Yellow
                 break;
             case 4:
                 //m_MyAudioSource.clip = note4;
-                noteColor = new Color(48, 255, 0, 1); //Green
+                noteColor = new Color(0, 1f, 0, 1); //Green
                 break;
             case 5:
                 //m_MyAudioSource.clip = note5;
-                noteColor = new Color(0, 193, 255, 1); // Light blue
+                noteColor = new Color(0, 1f, 1f, 1); // Light blue
                 break;
             case 6:
                 //m_MyAudioSource.clip = note6;
-                noteColor = new Color(7, 0, 255, 1); //Deep blue
+                noteColor = new Color(0f, 0f, 1f, 1); //Deep blue
                 break;
             case 7:
                 //m_MyAudioSource.clip = note7;
-                noteColor = new Color(199, 0, 255, 1); //Purple
+                noteColor = new Color(0.5f, 0f, 1f, 1); //Purple
                 break;
             case 8:
                 //m_MyAudioSource.clip = note8;
-                noteColor = new Color(255, 72, 170, 1); //Pink
+                noteColor = new Color(1f, 0f, 1f, 1); //Pink
                 break;
             default: break; //add error noise or something here
 
