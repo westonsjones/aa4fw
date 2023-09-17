@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 //Credit to https://sharpcoderblog.com/blog/unity-3d-fps-controller for initial template. Weston Jones further modified for the Austin IDGA Game Jam in September 2023.
 [RequireComponent(typeof(CharacterController))]
 
@@ -122,6 +123,11 @@ public class Player : MonoBehaviour
             UpdateLightAndSound();
         }
 
+        if (Input.GetKey("escape"))
+        {
+            Application.Quit();
+        }
+
 
     }
 
@@ -141,13 +147,13 @@ public class Player : MonoBehaviour
 
     void UpdateLightAndSound()
     {
-        Debug.Log("Update Light and Sound called.");
+       // Debug.Log("Update Light and Sound called.");
         int sel = radioSelection + 1;
         switch (sel)
         {
             
             case 1:
-                Debug.Log("Case 1 called");
+                //Debug.Log("Case 1 called");
                 m_MyAudioSource.clip = note1;
                 noteColor = Color.red; // Red
                 Debug.Log(noteColor.ToString());
@@ -193,12 +199,14 @@ public class Player : MonoBehaviour
         // Inform Unity's GI system to recalculate GI based on the new emission map.
         //DynamicGI.SetEmissive(GetComponent<Renderer>(), noteColor * 10);
         //DynamicGI.UpdateEnvironment();
-        Debug.Log("Update Light and Sound finished.");
+       // Debug.Log("Update Light and Sound finished.");
     }
 
     public void GameOver()
     {
         //Add game over text that tells you you lost and why. (City run over).
+        Cursor.lockState = CursorLockMode.None;
+        SceneManager.LoadScene("GameOver");
 
     }
 
