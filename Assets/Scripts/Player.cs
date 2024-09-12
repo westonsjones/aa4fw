@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
     public bool beaconOnCooldown = false; //If false, player can place a beacon.
     public Color noteColor;
     public GameObject toneSphere;
+    public GameObject monsterRef;
     AudioSource m_MyAudioSource;
     public AudioClip note1, note2, note3, note4, note5, note6, note7, note8;
     new Renderer rend;
@@ -38,13 +39,14 @@ public class Player : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         m_MyAudioSource = GetComponent<AudioSource>();
-        InvokeRepeating("PlayTone", 1.0f, 6.0f);
+        
         rend = toneSphere.GetComponent<Renderer>();
         mat = toneSphere.GetComponent<Renderer>().material;
 
         // Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        UpdateLightAndSound();
     }
 
     void Update()
@@ -90,9 +92,14 @@ public class Player : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0)) // Left click, turn on radio.
         {
-            if (!broadcasting)
-            { broadcasting = true; }
-            else { broadcasting = false; }
+            if (!beaconOnCooldown)
+            {
+                beaconOnCooldown = true;
+                PlayTone();
+                monsterRef.GetComponent<Monster>().waypointTarget = GameObject.FindWithTag("Player");
+
+            }
+            StartCoroutine(Cooldown());
         }
 
         if (Input.GetMouseButtonDown(1)) // Placing Beacon, right click.
@@ -139,10 +146,7 @@ public class Player : MonoBehaviour
 
     void PlayTone()
     {
-        if(broadcasting)
-        {
-            m_MyAudioSource.Play();
-        }
+        m_MyAudioSource.Play();
     }
 
     void UpdateLightAndSound()
@@ -212,7 +216,7 @@ public class Player : MonoBehaviour
 
     IEnumerator Cooldown()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(2);
         beaconOnCooldown = false;
         Debug.Log("Cooldown over");
     }
